@@ -1,0 +1,180 @@
+// reset
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+// custom variables
+
+$clr-primary: rgb(116, 177, 241);
+$clr-secondary: rgb(245, 245, 245);
+$clr-ternary: rgb(23, 85, 241);
+$delay: 2.3s;
+$time-duration: 2s;
+$offset-top: 5rem;
+
+// container
+
+.container {
+    min-width: auto;
+    min-height: 100vh;
+    position: relative;
+    background-color: $clr-secondary;
+    z-index: 1;
+    overflow: hidden;
+}
+
+// set-center
+
+%set-center {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+// waterdrop
+
+.waterdrop {
+    display: block;
+    top: 0;
+    left: 50%;
+    min-width: 2rem;
+    min-height: 5rem;
+    @extend %set-center;
+    animation: godown $time-duration linear 500ms infinite;
+}
+
+// waterdrop_top
+
+.waterdrop_top {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    @extend %set-center;
+    min-width: 2rem;
+    min-height: 3rem;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    background-color: $clr-primary;
+}
+
+// waterdrop_bottom
+
+.waterdrop_bottom {
+    display: block;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    @extend %set-center;
+    min-width: 2rem;
+    min-height: 2rem;
+    clip-path: circle(50%);
+    background-color: $clr-primary;
+}
+
+// water
+
+.water {
+    margin-top: 50vh;
+    position: relative;
+    min-height: 50vh;
+    min-width: inherit;
+    background-color: $clr-primary;
+    z-index: 1;
+
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        min-width: 15rem;
+        min-height: 20rem;
+        border-radius: 5rem;
+        position: absolute;
+        top: 0%;
+        background-color: $clr-primary;
+    }
+
+    &::before {
+        transform-origin: right;
+        right: 50%;
+        animation: goleft $time-duration linear $delay infinite;
+        z-index: -2;
+    }
+
+    &::after {
+        transform-origin: left;
+        left: 50%;
+        animation: goright $time-duration linear $delay infinite;
+        z-index: -1;
+    }
+}
+
+// water_text
+
+.water_text {
+    display: block;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    @extend %set-center;
+    top: 50%;
+    left: 50%;
+    font-size: 2.1rem;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, $clr-secondary 50%, $clr-ternary 50%);
+    animation: translating $time-duration ease-out $delay infinite;
+}
+
+// animations
+
+@keyframes goleft {
+    0% {
+        top: $offset-top;
+        transform: translateX(0) rotate(45deg);
+    }
+
+    100% {
+        top: $offset-top;
+        transform: translateX(-100%) rotate(45deg);
+    }
+}
+
+@keyframes goright {
+    0% {
+        top: $offset-top;
+        transform: translateX(0) rotate(-45deg);
+    }
+
+    100% {
+        top: $offset-top;
+        transform: translateX(100%) rotate(-45deg);
+    }
+}
+
+@keyframes godown {
+    0% {
+        transform: translate(-50%, 0%);
+    }
+
+    100% {
+        transform: translate(-50%, 50vh);
+    }
+}
+
+@keyframes translating {
+    0% {
+        background-position-x: 100%;
+    }
+
+    100% {
+        background-position-x: 0%;
+    }
+}
