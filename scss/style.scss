@@ -18,9 +18,11 @@ html {
 $clr-primary: rgb(116, 177, 241);
 $clr-secondary: rgb(245, 245, 245);
 $clr-ternary: rgb(23, 85, 241);
-$delay: 2.3s;
+$delay: 1.8s;
 $time-duration: 2s;
 $offset-top: 5rem;
+$timing-function: ease-out;
+$rotating45deg: 45deg;
 
 // container
 
@@ -49,7 +51,7 @@ $offset-top: 5rem;
     min-width: 2rem;
     min-height: 5rem;
     @extend %set-center;
-    animation: godown $time-duration linear 500ms infinite;
+    animation: godown $time-duration $timing-function 500ms infinite;
 }
 
 // waterdrop_top
@@ -105,14 +107,14 @@ $offset-top: 5rem;
     &::before {
         transform-origin: right;
         right: 50%;
-        animation: goleft $time-duration linear $delay infinite;
+        animation: goright $time-duration $timing-function $delay infinite;
         z-index: -2;
     }
 
     &::after {
         transform-origin: left;
         left: 50%;
-        animation: goright $time-duration linear $delay infinite;
+        animation: goleft $time-duration $timing-function $delay infinite;
         z-index: -1;
     }
 }
@@ -130,32 +132,32 @@ $offset-top: 5rem;
     font-size: 2.1rem;
     background-size: 200% 100%;
     background-image: linear-gradient(to right, $clr-secondary 50%, $clr-ternary 50%);
-    animation: translating $time-duration ease-out $delay infinite;
+    animation: translating $time-duration $timing-function $delay infinite;
 }
 
 // animations
 
-@keyframes goleft {
-    0% {
-        top: $offset-top;
-        transform: translateX(0) rotate(45deg);
-    }
-
-    100% {
-        top: $offset-top;
-        transform: translateX(-100%) rotate(45deg);
-    }
-}
-
 @keyframes goright {
     0% {
         top: $offset-top;
-        transform: translateX(0) rotate(-45deg);
+        transform: translateX(0%) rotate($rotating45deg);
     }
 
     100% {
         top: $offset-top;
-        transform: translateX(100%) rotate(-45deg);
+        transform: translateX(-100%) rotate($rotating45deg);
+    }
+}
+
+@keyframes goleft {
+    0% {
+        top: $offset-top;
+        transform: translateX(0%) rotate(-$rotating45deg);
+    }
+
+    100% {
+        top: $offset-top;
+        transform: translateX(100%) rotate(-$rotating45deg);
     }
 }
 
@@ -165,7 +167,7 @@ $offset-top: 5rem;
     }
 
     100% {
-        transform: translate(-50%, 50vh);
+        transform: translate(-50%, 60vh);
     }
 }
 
