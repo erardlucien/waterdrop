@@ -22,6 +22,7 @@ $delay: 1.8s;
 $time-duration: 2s;
 $offset-top: 5rem;
 $timing-function: ease-out;
+$timing-function2: linear;
 $rotating45deg: 45deg;
 
 // container
@@ -107,14 +108,14 @@ $rotating45deg: 45deg;
     &::before {
         transform-origin: right;
         right: 50%;
-        animation: goright $time-duration $timing-function $delay infinite;
+        animation: goright $time-duration $timing-function2 $delay infinite;
         z-index: -2;
     }
 
     &::after {
         transform-origin: left;
         left: 50%;
-        animation: goleft $time-duration $timing-function $delay infinite;
+        animation: goleft $time-duration $timing-function2 $delay infinite;
         z-index: -1;
     }
 }
