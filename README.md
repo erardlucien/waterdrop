@@ -1,3 +1,3 @@
 # waterdrop 
 
-https://erardlucien.github.io/waterdrop/
+[demo](https://erardlucien.github.io/waterdrop/)
